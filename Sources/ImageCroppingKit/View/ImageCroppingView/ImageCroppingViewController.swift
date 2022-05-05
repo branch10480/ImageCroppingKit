@@ -27,11 +27,14 @@ class ImageCroppingViewController: UIViewController {
   }
 
   private func setup() {
-    maskView.maskingAspectRatio = maskingAspectRatio
-    setupDummyImage()
+    scrollView.showsVerticalScrollIndicator = false
+    scrollView.showsHorizontalScrollIndicator = false
     scrollView.delegate = self
     scrollView.minimumZoomScale = 1.0
     scrollView.maximumZoomScale = 3.0
+
+    maskView.maskingAspectRatio = maskingAspectRatio
+    setupDummyImage()
   }
 
   private func setupImage(_ image: UIImage?) {
