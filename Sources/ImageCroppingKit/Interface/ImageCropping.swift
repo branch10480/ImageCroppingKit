@@ -20,5 +20,7 @@ public struct ImageCropping {
 }
 
 public protocol ImageCroppingController: UIViewController {
-  func configure()
+  /// Configure params.
+  /// - Parameter maskingAspectRatio: Width / Height
+  func configure(maskingAspectRatio: CGFloat)
 }

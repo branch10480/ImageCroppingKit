@@ -19,6 +19,7 @@ class ViewController: UIViewController {
 
   @IBAction func didTapButton(_ sender: Any) {
     let vc = ImageCropping.create()
+    vc.configure(maskingAspectRatio: 24.0 / 9)
     present(vc, animated: true)
   }
 }
