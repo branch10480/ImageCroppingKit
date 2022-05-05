@@ -10,6 +10,12 @@ import UIKit
 class MaskView: UIView {
   var maskingAspectRatio: CGFloat = 1
 
+  var maskingRect: CGRect {
+    let width = bounds.width
+    let height = width / maskingAspectRatio
+    return CGRect(x: 0, y: (bounds.height - height) / 2, width: width, height: height)
+  }
+
   private var maskedLayer: CALayer?
 
   private func createLayer(innerOf parentLayer: CALayer) -> CALayer {

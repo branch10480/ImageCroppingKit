@@ -44,9 +44,14 @@ class ImageCroppingViewController: UIViewController {
     let viewWidth = UIScreen.main.bounds.width
     let imageHeight = viewWidth * height / width
     imageHeightConstraint.constant = imageHeight
-    let verticalInset = (viewHeight - imageHeight) / 2
+    var verticalInset = (viewHeight - imageHeight) / 2
+    let diff = imageHeight - maskView.maskingRect.height
+    if diff > 0 {
+      verticalInset += diff / 2
+    }
     scrollView.contentInset.top = verticalInset
     scrollView.contentInset.bottom = verticalInset
+    scrollView.contentOffset.y = -verticalInset + diff / 2
   }
 
   private func setupDummyImage() {
@@ -80,7 +85,11 @@ extension ImageCroppingViewController: UIScrollViewDelegate {
 
   private func updateContentInset() {
     let widthInset = max((scrollView.frame.width - imageView.frame.width) / 2, 0)
-    let heightInset = max((scrollView.frame.height - imageView.frame.height) / 2, 0)
+    var heightInset = max((scrollView.frame.height - imageView.frame.height) / 2, 0)
+    let diff = imageView.frame.height - maskView.maskingRect.height
+    if diff > 0 {
+      heightInset += diff / 2
+    }
     scrollView.contentInset = .init(top: heightInset,
                                     left: widthInset,
                                     bottom: heightInset,
