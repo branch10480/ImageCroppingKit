@@ -8,11 +8,24 @@
 import UIKit
 
 class ImageCroppingViewController: UIViewController {
+  @IBOutlet weak var imageView: UIImageView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
 
-        // Do any additional setup after loading the view.
-    }
+  private func setup() {
+  }
 
+  @IBAction func didTapCloseButton(_ sender: Any) {
+    dismiss(animated: true)
+  }
+
+}
+
+// MARK: - ImageCroppingController
+
+extension ImageCroppingViewController: ImageCroppingController {
+  func configure() {
+  }
 }

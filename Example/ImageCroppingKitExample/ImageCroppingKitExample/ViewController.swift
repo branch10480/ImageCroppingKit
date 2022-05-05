@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ImageCroppingKit
 
 class ViewController: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
@@ -17,6 +18,8 @@ class ViewController: UIViewController {
   }
 
   @IBAction func didTapButton(_ sender: Any) {
+    let vc = ImageCropping.create()
+    present(vc, animated: true)
   }
 }
 

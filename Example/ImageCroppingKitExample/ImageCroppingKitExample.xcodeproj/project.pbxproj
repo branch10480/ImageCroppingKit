@@ -13,6 +13,7 @@
 		4801552B28238E7000FC5A0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4801552928238E7000FC5A0B /* Main.storyboard */; };
 		4801552D28238E7000FC5A0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4801552C28238E7000FC5A0B /* Assets.xcassets */; };
 		4801553028238E7000FC5A0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4801552E28238E7000FC5A0B /* LaunchScreen.storyboard */; };
+		482CB4342823955100596799 /* ImageCroppingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 482CB4332823955100596799 /* ImageCroppingKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482CB4342823955100596799 /* ImageCroppingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +46,7 @@
 				480155382823903A00FC5A0B /* Packages */,
 				4801552228238E7000FC5A0B /* ImageCroppingKitExample */,
 				4801552128238E7000FC5A0B /* Products */,
+				482CB4322823955100596799 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +80,13 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		482CB4322823955100596799 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +103,9 @@
 			dependencies = (
 			);
 			name = ImageCroppingKitExample;
+			packageProductDependencies = (
+				482CB4332823955100596799 /* ImageCroppingKit */,
+			);
 			productName = ImageCroppingKitExample;
 			productReference = 4801552028238E7000FC5A0B /* ImageCroppingKitExample.app */;
 			productType = "com.apple.product-type.application";
@@ -368,6 +381,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		482CB4332823955100596799 /* ImageCroppingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ImageCroppingKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4801551828238E6F00FC5A0B /* Project object */;
 }
