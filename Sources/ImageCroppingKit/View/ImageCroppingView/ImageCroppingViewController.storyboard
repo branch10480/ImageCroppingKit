@@ -47,11 +47,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oW-qg-aow">
-                                <rect key="frame" x="318.5" y="60" width="79.5" height="31"/>
+                                <rect key="frame" x="353" y="60" width="45" height="31"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <buttonConfiguration key="configuration" style="tinted" image="checkmark.circle" catalog="system" title="Done"/>
+                                <buttonConfiguration key="configuration" style="tinted" image="checkmark.circle" catalog="system"/>
                                 <connections>
-                                    <action selector="didTapCloseButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="OKc-Mm-Yeh"/>
+                                    <action selector="didTapDoneButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eUq-rz-6N7"/>
                                 </connections>
                             </button>
                         </subviews>

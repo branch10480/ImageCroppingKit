@@ -13,7 +13,10 @@ class ImageCroppingViewController: UIViewController {
   @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
 
+  typealias CloseType = ImageCropping.CloseType
+
   private var maskingAspectRatio: CGFloat = 1.0
+  private var didClose: ((CloseType) -> ())?
 
   private var image: UIImage? {
     didSet {
@@ -71,8 +74,43 @@ class ImageCroppingViewController: UIViewController {
     #endif
   }
 
-  @IBAction func didTapCloseButton(_ sender: Any) {
+  private func cropImage() -> UIImage? {
+    guard let image = image else {
+      return nil
+    }
+
+    let dummyCropAreaView = UIView()
+    dummyCropAreaView.frame = maskView.maskingRect
+    let cropArea = dummyCropAreaView.convert(dummyCropAreaView.bounds, to: scrollView)
+
+    let imageScale = max(image.size.width / imageView.frame.width,
+                         image.size.height / imageView.frame.height)
+    let cropZone = CGRect(x: cropArea.origin.x * imageScale,
+                          y: cropArea.origin.y * imageScale,
+                          width: cropArea.width * imageScale,
+                          height: cropArea.height * imageScale)
+
+    guard let croppedCGImage = image.cgImage?.cropping(to: cropZone) else {
+      return nil
+    }
+    let croppedImage = UIImage(cgImage: croppedCGImage,
+                               scale: 0,
+                               orientation: image.imageOrientation)
+    return croppedImage
+  }
+
+  private func dismiss(_ type: CloseType) {
     dismiss(animated: true)
+    didClose?(type)
+  }
+
+  @IBAction func didTapCloseButton(_ sender: Any) {
+    dismiss(.cancel)
+  }
+
+  @IBAction func didTapDoneButton(_ sender: Any) {
+    let image = cropImage()
+    dismiss(.crop(image))
   }
 
 }
@@ -104,7 +142,8 @@ extension ImageCroppingViewController: UIScrollViewDelegate {
 // MARK: - ImageCroppingController
 
 extension ImageCroppingViewController: ImageCroppingController {
-  func configure(maskingAspectRatio ratio: CGFloat) {
+  func configure(maskingAspectRatio ratio: CGFloat, didClose: ((CloseType) -> ())?) {
     self.maskingAspectRatio = ratio
+    self.didClose = didClose
   }
 }

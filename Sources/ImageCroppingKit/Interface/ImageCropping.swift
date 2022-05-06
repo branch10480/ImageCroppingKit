@@ -17,10 +17,16 @@ public struct ImageCropping {
     vc.modalPresentationStyle = .overFullScreen
     return vc
   }
+
+  public enum CloseType {
+    case crop(UIImage?)
+    case cancel
+  }
+
 }
 
 public protocol ImageCroppingController: UIViewController {
   /// Configure params.
   /// - Parameter maskingAspectRatio: Width / Height
-  func configure(maskingAspectRatio: CGFloat)
+  func configure(maskingAspectRatio ratio: CGFloat, didClose: ((ImageCropping.CloseType) -> ())?)
 }

@@ -19,7 +19,13 @@ class ViewController: UIViewController {
 
   @IBAction func didTapButton(_ sender: Any) {
     let vc = ImageCropping.create()
-    vc.configure(maskingAspectRatio: 24.0 / 9)
+    vc.configure(maskingAspectRatio: 24.0 / 9) { [weak self] type in
+      switch type {
+      case .crop(let image):
+        self?.imageView.image = image
+      case .cancel: ()
+      }
+    }
     present(vc, animated: true)
   }
 }
