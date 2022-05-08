@@ -29,7 +29,7 @@
                                 <constraints>
                                     <constraint firstItem="Cd6-xT-2tW" firstAttribute="top" secondItem="w4j-Ht-miB" secondAttribute="top" id="Hjw-5c-1m2"/>
                                     <constraint firstItem="Cd6-xT-2tW" firstAttribute="bottom" secondItem="w4j-Ht-miB" secondAttribute="bottom" id="XZB-fa-0xa"/>
-                                    <constraint firstItem="Cd6-xT-2tW" firstAttribute="trailing" secondItem="w4j-Ht-miB" secondAttribute="trailing" constant="414" id="n5W-fH-6kJ"/>
+                                    <constraint firstItem="Cd6-xT-2tW" firstAttribute="trailing" secondItem="w4j-Ht-miB" secondAttribute="trailing" id="n5W-fH-6kJ"/>
                                     <constraint firstItem="Cd6-xT-2tW" firstAttribute="width" secondItem="JTV-xu-jgM" secondAttribute="width" id="vxF-Cg-Pdu"/>
                                     <constraint firstItem="Cd6-xT-2tW" firstAttribute="leading" secondItem="w4j-Ht-miB" secondAttribute="leading" id="yCz-Vw-M8D"/>
                                 </constraints>
