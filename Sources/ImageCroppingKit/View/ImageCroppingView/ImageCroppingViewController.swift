@@ -72,10 +72,11 @@ class ImageCroppingViewController: UIViewController {
 
     let imageScale = max(image.size.width / imageView.frame.width,
                          image.size.height / imageView.frame.height)
-    let cropZone = CGRect(x: cropArea.origin.x * imageScale,
+    var cropZone = CGRect(x: cropArea.origin.x * imageScale,
                           y: cropArea.origin.y * imageScale,
                           width: cropArea.width * imageScale,
                           height: cropArea.height * imageScale)
+    cropZone = transform(rect: cropZone, by: image)
 
     guard let croppedCGImage = image.cgImage?.cropping(to: cropZone) else {
       return nil
@@ -84,6 +85,22 @@ class ImageCroppingViewController: UIViewController {
                                scale: 0,
                                orientation: image.imageOrientation)
     return croppedImage
+  }
+
+  private func transform(rect: CGRect, by image: UIImage) -> CGRect {
+    var transform: CGAffineTransform
+    let imageOrientation = image.imageOrientation
+    switch imageOrientation {
+    case .left:
+      transform = CGAffineTransform(rotationAngle: .pi / 2).translatedBy(x: 0, y: -image.size.height)
+    case .right:
+      transform = CGAffineTransform(rotationAngle: -.pi / 2).translatedBy(x: -image.size.width, y: 0)
+    case .down:
+      transform = CGAffineTransform(rotationAngle: -.pi).translatedBy(x: -image.size.width, y: -image.size.height)
+    default:
+      transform = .identity
+    }
+    return rect.applying(transform)
   }
 
   private func dismiss(_ type: CloseType) {
