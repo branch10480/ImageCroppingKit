@@ -23,10 +23,13 @@ class ImageCroppingViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    DispatchQueue.main.async { [weak self] in
-      self?.setupImage(self?.image)
-    }
   }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupImage(image)
+  }
+
 
   private func setup() {
     scrollView.showsVerticalScrollIndicator = false
