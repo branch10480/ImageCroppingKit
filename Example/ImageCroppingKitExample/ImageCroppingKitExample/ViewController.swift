@@ -18,8 +18,22 @@ class ViewController: UIViewController {
   }
 
   @IBAction func didTapButton(_ sender: Any) {
+    let dummyImageString = "https://www.kodo.or.jp/cms/wp-content/uploads/2021/08/genshin-inazuma.jpg"
+    DispatchQueue.global().async { [weak self] in
+      if let url = URL(string: dummyImageString),
+         let data = try? Data(contentsOf: url),
+         let image = UIImage(data: data)
+      {
+        DispatchQueue.main.async {
+          self?.showCroppingView(image: image)
+        }
+      }
+    }
+  }
+
+  private func showCroppingView(image: UIImage) {
     let vc = ImageCropping.create()
-    vc.configure(maskingAspectRatio: 24.0 / 9) { [weak self] type in
+    vc.configure(image: image, maskingAspectRatio: 24.0 / 9) { [weak self] type in
       switch type {
       case .crop(let image):
         self?.imageView.image = image

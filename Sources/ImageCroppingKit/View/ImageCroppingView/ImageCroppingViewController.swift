@@ -18,15 +18,14 @@ class ImageCroppingViewController: UIViewController {
   private var maskingAspectRatio: CGFloat = 1.0
   private var didClose: ((CloseType) -> ())?
 
-  private var image: UIImage? {
-    didSet {
-      setupImage(image)
-    }
-  }
+  private var image: UIImage?
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    DispatchQueue.main.async { [weak self] in
+      self?.setupImage(self?.image)
+    }
   }
 
   private func setup() {
@@ -37,7 +36,6 @@ class ImageCroppingViewController: UIViewController {
     scrollView.maximumZoomScale = 3.0
 
     maskView.maskingAspectRatio = maskingAspectRatio
-    setupDummyImage()
   }
 
   private func setupImage(_ image: UIImage?) {
@@ -58,20 +56,6 @@ class ImageCroppingViewController: UIViewController {
     scrollView.contentInset.top = verticalInset
     scrollView.contentInset.bottom = verticalInset
     scrollView.contentOffset.y = -verticalInset + diff / 2
-  }
-
-  private func setupDummyImage() {
-    #if targetEnvironment(simulator)
-    let dummyImageString = "https://www.kodo.or.jp/cms/wp-content/uploads/2021/08/genshin-inazuma.jpg"
-    DispatchQueue.global().async { [weak self] in
-      if let url = URL(string: dummyImageString),
-         let data = try? Data(contentsOf: url) {
-        DispatchQueue.main.async {
-          self?.image = UIImage(data: data)
-        }
-      }
-    }
-    #endif
   }
 
   private func cropImage() -> UIImage? {
@@ -142,7 +126,8 @@ extension ImageCroppingViewController: UIScrollViewDelegate {
 // MARK: - ImageCroppingController
 
 extension ImageCroppingViewController: ImageCroppingController {
-  func configure(maskingAspectRatio ratio: CGFloat, didClose: ((CloseType) -> ())?) {
+  func configure(image: UIImage, maskingAspectRatio ratio: CGFloat, didClose: ((CloseType) -> ())?) {
+    self.image = image
     self.maskingAspectRatio = ratio
     self.didClose = didClose
   }
