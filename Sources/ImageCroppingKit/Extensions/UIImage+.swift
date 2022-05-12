@@ -23,7 +23,7 @@ public extension UIImage {
       newSize.height = maxLength
     }
 
-    let renderer = UIGraphicsImageRenderer(size: newSize)
+    let renderer = UIGraphicsImageRenderer(size: newSize, format: imageRendererFormat)
     let image = renderer.image { context in
       draw(in: .init(origin: .zero, size: newSize))
     }
