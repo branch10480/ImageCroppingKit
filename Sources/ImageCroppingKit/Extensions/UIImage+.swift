@@ -24,8 +24,9 @@ public extension UIImage {
     }
 
     let renderer = UIGraphicsImageRenderer(size: newSize)
-    return renderer.image { context in
+    let image = renderer.image { context in
       draw(in: .init(origin: .zero, size: newSize))
     }
+    return image
   }
 }
